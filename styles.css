@@ -1,0 +1,554 @@
+/* Basic reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0b1220;
+  color: #e0e0e0;
+  line-height: 1.5;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Layout */
+.topbar {
+  background: #1a1f2e;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  border-bottom: 1px solid #2a2f3e;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.logo {
+  background: #ff6b6b;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0 12px 12px;
+  overflow: hidden; /* geen scroll */
+}
+
+.tab {
+  min-width: 0; /* belangrijk bij grid */
+  width: 100%;
+  background: none;
+  border: 1px solid #2a2f3e;
+  color: #a0a0a0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  color: white;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.view {
+  display: block;
+}
+
+.view.hidden {
+  display: none;
+}
+
+.card {
+  background: #1a1f2e;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #2a2f3e;
+}
+
+/* Typography */
+.h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.muted {
+  color: #a0a0a0;
+}
+
+.small {
+  font-size: 12px;
+}
+
+/* Layout helpers */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.gap8 {
+  gap: 8px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.divider {
+  height: 1px;
+  background: #2a2f3e;
+  margin: 20px 0;
+}
+
+/* Day Navigation */
+.dayNav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.btn.nav {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  text-align: center;
+}
+
+.btn.nav:hover {
+  filter: brightness(1.12);
+}
+
+.btn.primaryNav {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+  font-weight: 950;
+}
+
+/* Badge */
+.badge {
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Tasks */
+.tasksStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.taskRow {
+  border: 1px solid #2a2f3e;
+  border-radius: 8px;
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+
+.taskRow.done {
+  border-color: #4ade80;
+}
+
+.taskRow.open {
+  border-color: #2a2f3e;
+}
+
+.taskTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.taskTitle {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.taskMeta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #2a2f3e;
+  color: #a0a0a0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.tag.monday {
+  background: #fbbf24;
+  color: #000;
+}
+
+.tag.goal {
+  background: #3b82f6;
+  color: white;
+}
+
+.tag.done {
+  background: #4ade80;
+  color: white;
+}
+
+.tag.open {
+  background: #6b7280;
+  color: white;
+}
+
+/* Checkboxes */
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.check input {
+  margin: 0;
+}
+
+/* Inputs */
+.input {
+  background: #0b1220;
+  border: 1px solid #2a2f3e;
+  color: #e0e0e0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+}
+
+/* Buttons */
+.btn {
+  background: #2a2f3e;
+  border: 1px solid #2a2f3e;
+  color: #e0e0e0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: #3a3f4e;
+}
+
+.btn.primary {
+  background: rgba(34,197,94,.18);
+  border-color: rgba(34,197,94,.35);
+  color: #e0e0e0;
+}
+
+.btn.primary.ready {
+  background: rgba(34,197,94,.92) !important;
+  border-color: rgba(34,197,94,.95) !important;
+  color: #052e14 !important;
+}
+
+.btn.primary.done {
+  background: rgba(34,197,94,.35) !important;
+  border-color: rgba(34,197,94,.50) !important;
+}
+
+.btn.danger {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: white;
+}
+
+.btn.danger:hover {
+  background: #b91c1c;
+}
+
+.btn.ghost {
+  background: none;
+  border: none;
+  color: #a0a0a0;
+}
+
+.btn.ghost:hover {
+  color: #e0e0e0;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Calendar */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.dayCell {
+  background: #1a1f2e;
+  border: 1px solid #2a2f3e;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dayCell:hover {
+  border-color: #3a3f4e;
+}
+
+.dayCell.done {
+  background: rgba(34,197,94,.30) !important;
+  border-color: rgba(34,197,94,.70) !important;
+}
+
+.dayCell.fail {
+  background: #dc2626;
+  color: white;
+}
+
+.dayCell.future {
+  opacity: 0.5;
+}
+
+.dayCell.selected {
+  outline: 2px solid rgba(245,158,11,.85) !important;
+}
+
+.dayCell .n {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-bottom: 4px;
+}
+
+.dayCell .d {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dayCell.done .n {
+  color: #eafff2 !important;
+  opacity: 1 !important;
+}
+.dayCell.done .d {
+  color: #d1ffe5 !important;
+  opacity: 1 !important;
+}
+
+/* Dots */
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.dot.done {
+  background: #4ade80;
+}
+
+.dot.fail {
+  background: #dc2626;
+}
+
+.dot.pending {
+  background: #6b7280;
+}
+
+/* Stats */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.stat {
+  background: #0b1220;
+  border: 1px solid #2a2f3e;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #2a2f3e;
+}
+
+.statLine:last-child {
+  border-bottom: none;
+}
+
+/* Settings */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1f2e;
+  color: #e0e0e0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #2a2f3e;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+}
+
+/* Hidden */
+.hidden {
+  display: none !important;
+}
+
+/* Progress */
+progress {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #2a2f3e;
+}
+
+progress::-webkit-progress-bar {
+  background: #2a2f3e;
+  border-radius: 3px;
+}
+
+progress::-webkit-progress-value {
+  background: #3b82f6;
+  border-radius: 3px;
+}
+
+progress::-moz-progress-bar {
+  background: #3b82f6;
+  border-radius: 3px;
+}
+
+
+/* Verberg pijltjes/spinners bij number inputs */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* iPhone: laat headers/tags netjes wrappen */
+.taskTop{ flex-wrap: wrap; gap: 10px; }
+.taskTitle{ min-width:0; flex:1 1 220px; overflow-wrap:anywhere; word-break:break-word; }
+.tag{ max-width:100%; overflow-wrap:anywhere; word-break:break-word; }
+
+@media (max-width: 420px){
+  .grid2{ grid-template-columns: 1fr; }
+  .tabs{ grid-template-columns: repeat(2, 1fr); row-gap: 8px; }
+  .tab{ padding: 10px 12px; }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#0b1220" name="theme-color"/>
+<link href="./manifest.webmanifest" rel="manifest"/>
+<link href="./styles.css?v=20260104_v6" rel="stylesheet"/>
+<link href="./icons/icon-192.png" rel="apple-touch-icon"/>
+<title>Robin &amp; Noor Tracker</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="RN Tracker" name="apple-mobile-web-app-title"/><meta content="telephone=no" name="format-detection"/></head>
+<body>
+<header class="topbar">
+<div class="brand">
+<div class="logo">RN</div>
+<div>
+<div class="title">Robin &amp; Noor Tracker</div>
+<div class="subtitle" id="headerSubtitle">—</div>
+</div>
+</div>
+<nav aria-label="Navigatie" class="tabs" role="tablist">
+<button class="tab active" data-view="today" role="tab">Vandaag</button>
+<button class="tab" data-view="calendar" role="tab">Kalender</button>
+<button class="tab" data-view="stats" role="tab">Stats</button>
+<button class="tab" data-view="settings" role="tab">Instellingen</button>
+</nav>
+</header>
+<main class="container">
+<!-- TODAY -->
+<section class="view" id="view-today">
+<div class="card">
+<div class="row between">
+<div>
+<div class="h1" id="dayHeading">Dag —</div>
+<div class="muted" id="dateHeading">—</div>
+<div class="muted small" id="profileHeading">—</div>
+</div>
+<div class="badge" id="progressBadge">0/0</div>
+</div>
+<div class="divider"></div>
+<div class="dayNav">
+<button class="btn nav" id="prevDayBtn">◀ Gisteren</button>
+<button class="btn nav primaryNav" id="todayBtn">Vandaag</button>
+<button class="btn nav" id="nextDayBtn">Morgen ▶</button>
+</div>
+<div class="divider"></div>
+<div class="h2">Taken</div>
+<div class="tasksStack" id="tasksContainer"></div>
+<div class="divider"></div>
+<div class="row gap8 wrap">
+<button class="btn primary" disabled="" id="completeDayBtn">Dag afronden ✅</button>
+<button class="btn danger" id="failDayBtn">Fail Day ❌</button>
+</div>
+<div class="muted small" id="todayHint"></div>
+</div>
+</section>
+<!-- CALENDAR -->
+<section class="view hidden" id="view-calendar">
+<div class="card">
+<div class="row between">
+<div>
+<div class="h1">Kalender</div>
+<div class="muted">Klik een dag om te openen en alvast in te vullen.</div>
+</div>
+<div class="row gap8">
+<button class="btn ghost" id="jumpTodayBtn">Ga naar vandaag</button>
+</div>
+</div>
+<div class="divider"></div>
+<div class="calendar" id="calendarGrid"></div>
+<div class="divider"></div>
+<div class="muted small">
+          Legenda: <span class="dot done"></span> afgerond, <span class="dot fail"></span> fail, <span class="dot pending"></span> open/toekomst.
+        </div>
+</div>
+<div class="card">
+<div class="h2">Geselecteerde dag</div>
+<div class="muted" id="selectedDayInfo">Geen geselecteerde dag.</div>
+<div class="divider"></div>
+<div class="row gap8 wrap">
+<button class="btn" disabled="" id="openSelectedInTodayBtn">Open in Vandaag</button>
+<button class="btn ghost" disabled="" id="clearSelectedBtn">Wis data van dag</button>
+</div>
+</div>
+</section>
+<!-- STATS -->
+<section class="view hidden" id="view-stats">
+<div class="card">
+<div class="row between">
+<div>
+<div class="h1">Stats</div>
+<div class="muted small">Per profiel apart.</div>
+</div>
+<div class="badge" id="profileBadge">—</div>
+</div>
+<div class="divider"></div>
+<div class="statsGrid">
+<div class="stat">
+<div class="statLabel">Huidige dag</div>
+<div class="statValue" id="statDay">—</div>
+</div>
+<div class="stat">
+<div class="statLabel">Voltooid</div>
+<div class="statValue" id="statCompleted">—</div>
+</div>
+<div class="stat">
+<div class="statLabel">Streak</div>
+<div class="statValue" id="statStreak">—</div>
+</div>
+<div class="stat">
+<div class="statLabel">Voortgang</div>
+<div class="statValue" id="statPercent">—</div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="h2" id="profileStatsTitle">Profiel stats</div>
+<div class="statsList" id="profileStats"></div>
+<div class="divider"></div>
+</div>
+</section>
+<!-- SETTINGS -->
+<section class="view hidden" id="view-settings">
+<div class="card">
+<div class="h1">Instellingen</div>
+<div class="divider"></div>
+<div class="grid2">
+<div class="field">
+<div class="label">Actief profiel:</div>
+<select class="input" id="profileSelect">
+<option value="Robin">Robin</option>
+<option value="Noor">Noor</option>
+</select>
+</div>
+</div>
+<div class="divider"></div>
+<div class="grid2">
+<div class="field">
+<div class="label">Startgewicht (kg):</div>
+<input class="input" id="startWeight" min="0" step="0.1" type="number" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*">
+</div>
+</div>
+<div class="divider"></div>
+<div class="grid2">
+<div class="field">
+<div class="label">Waterdoel (ml):</div>
+<input class="input" id="waterGoal" min="0" step="50" type="number" inputmode="numeric" pattern="[0-9]*">
+</div>
+<div class="field">
+<div class="label">Calorie-doel (kcal):</div>
+<input class="input" id="calGoal" min="0" step="10" type="number" inputmode="numeric" pattern="[0-9]*">
+</div>
+</div>
+<div class="divider"></div>
+<div class="row gap8 wrap">
+<button class="btn primary" id="saveSettingsBtn">Opslaan</button>
+</div>
+<div class="divider"></div>
+<button class="btn danger" id="wipeAllBtn">Alles wissen</button>
+</div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script src="./app.js?v=20260104_v6"></script>
+
+<script>
+  (function() {
+    const VER = "20260104_v6";
+    window.__RN_VER__ = VER;
+    if (!('serviceWorker' in navigator)) return;
+
+    window.addEventListener('load', async () => {
+      try {
+        const reg = await navigator.serviceWorker.register('./sw.js?v=' + VER);
+        if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+
+        reg.addEventListener('updatefound', () => {
+          const nw = reg.installing;
+          if (!nw) return;
+          nw.addEventListener('statechange', () => {
+            if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+              location.reload();
+            }
+          });
+        });
+
+        navigator.serviceWorker.addEventListener('controllerchange', () => location.reload());
+      } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
